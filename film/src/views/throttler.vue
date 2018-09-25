@@ -6,8 +6,8 @@ import Vue from "vue";
 import _ from "lodash";
 export default Vue.extend({
   methods: {
-    throttledMethod: _.debounce(() => {
-      console.log("I only get fired once every two seconds, max!");
+    throttledMethod: _.throttle(() => {
+      console.log("I only get fired once every two seconds, max!")
     }, 2000)
   }
 });
