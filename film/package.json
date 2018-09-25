@@ -9,6 +9,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.116",
     "lodash": "^4.17.11",
+    "pug": "^2.0.3",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1"
   },
