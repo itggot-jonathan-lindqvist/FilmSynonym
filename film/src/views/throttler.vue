@@ -1,5 +1,5 @@
 <template lang="pug">
-    <button @click="throttledMethod()">Click me as fast as you can!</button>
+    button(@click="throttledMethod()") Click me as fast as you can!
 </template>
 <script lang="ts">
 import Vue from "vue";
