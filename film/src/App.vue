@@ -1,11 +1,17 @@
 <template lang="pug">
-  .header
-    .header-item.random
-      i.material-icons shuffle
-    .header-item
-      h1.logo bMovie
-    .header-item.home
-      i.material-icons home
+  
+  .app
+    .header
+      .header-item.random
+        i.material-icons shuffle
+      .header-item
+        h1.logo bMovie
+      .header-item.home
+        i.material-icons home
+        router-link(to="/") Home |
+        router-link(to="/about") About |
+        router-link(to="/throttler") throttler
+    router-view
 
 </template>
 
@@ -19,14 +25,21 @@ export default Vue.extend({
 <style lang="sass">
   *
     margin: 0
+    padding: 0
+
+  .app
+    width: 100vw
+    height: 100vh
 
   .header
     width: 100%
-    height: 100px
+    height: 11vh
     background-color: DodgerBlue
     display: flex
     flex-direction: row
     justify-content: space-around
+    min-height: 100px
+    max-height: 100px
 
   .header-item
     width: 33%
