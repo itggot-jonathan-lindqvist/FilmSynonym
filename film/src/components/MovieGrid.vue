@@ -2,7 +2,7 @@
   .body
     header#main-header
       h1 {{ msg }}
-      input#txtMovieSearch(type="text" v-model="keyword")
+      input#txtMovieSearch(type="text" v-model="keyword" @keyup.enter="searchMovies()")
       button#btnMovieSearch(@click="searchMovies()") Go
     #movies-container
       .movie(v-for="film in movies" :key="film.id")
@@ -21,7 +21,6 @@ export default Vue.extend({
   data: () => ({
     keyword: "",
     movies: [],
-    Search: []
   }),
 
   props: {
