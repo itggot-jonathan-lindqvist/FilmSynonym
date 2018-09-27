@@ -1,9 +1,10 @@
 <template lang="pug">
-  .body
-    header#main-header
-      h1 {{ msg }}
-      input#txtMovieSearch(type="text" v-model="keyword" @keyup.enter="searchMovies()")
-      button#btnMovieSearch(@click="searchMovies()") Go
+  .container-item.form-container
+    .form
+      input(type="text" v-model="keyword" @keyup.enter="searchMovies()").search-text
+      button(@click="searchMovies").search-button
+        i.material-icons.search-button.value search
+
     #movies-container
       .movie(v-for="film in movies" :key="film.id")
         .img
@@ -87,7 +88,6 @@ body, html
   flex-flow: row wrap
   padding: 10px
   width: 700px
-  background-color: #eee
   margin: 0 auto
   .img
     margin: 10px

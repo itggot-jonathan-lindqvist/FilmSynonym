@@ -1,12 +1,18 @@
-<template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/throttler">throttler</router-link>
-    </div>
-    <router-view/>
-  </div>
+<template lang="pug">
+  
+  .app
+    .header
+      .header-item.random
+        i.material-icons shuffle
+      .header-item
+        h1.logo bMovie
+      .header-item.home
+        i.material-icons home
+        router-link(to="/") Home |
+        router-link(to="/about") About |
+        router-link(to="/throttler") throttler
+    router-view
+
 </template>
 
 <script lang="ts">
@@ -16,13 +22,48 @@ export default Vue.extend({
 })
 </script>
 
-
 <style lang="sass">
+  *
+    margin: 0
+    padding: 0
+
+  .app
+    width: 100vw
+    height: 100vh
+
+  .header
+    width: 100%
+    height: 11vh
+    background-color: DodgerBlue
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    min-height: 100px
+    max-height: 100px
+
+  .header-item
+    width: 33%
+    height: 100%
+    display: flex
+    flex-direction: row
+    justify-content: center
+
+  .home
+    justify-content: flex-start
+
+  .random
+    justify-content: flex-end
+
+  .logo
+    font-family: 'Lobster'
+    font-size: 90px
+    color: white
+
   .material-icons
     font-family: 'Material Icons'
     font-weight: normal
     font-style: normal
-    font-size: 100px
+    font-size: 90px
     display: inline-block
     line-height: 1
     text-transform: none
@@ -34,19 +75,7 @@ export default Vue.extend({
     text-rendering: optimizeLegibility
     -moz-osx-font-smoothing: grayscale
     font-feature-settings: 'liga'
-  #app
-    font-family: 'Avenir', Helvetica, Arial, sans-serif
-    -webkit-font-smoothing: antialiased
-    -moz-osx-font-smoothing: grayscale
-    text-align: center
-    color: #2c3e50
-
-  #nav
-    padding: 30px
-    a
-      font-weight: bold
-      color: #2c3e50
-      &.router-link-exact-active
-        color: #42b983
+    color: white
+    
 </style>
 
