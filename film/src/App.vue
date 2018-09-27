@@ -14,7 +14,6 @@
           router-link(to="/")
             i.material-icons home
 
-        router-link(to="/about") About |
         router-link(to="/throttler") throttler
     router-view
 
