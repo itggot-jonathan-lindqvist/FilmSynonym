@@ -3,12 +3,17 @@
   .app
     .header
       .header-item.random
-        i.material-icons shuffle
+        .header-link
+          i.material-icons shuffle
+
       .header-item
         h1.logo bMovie
+
       .header-item.home
-        i.material-icons home
-        router-link(to="/") Home |
+        .header-link
+          router-link(to="/")
+            i.material-icons home
+
         router-link(to="/about") About |
         router-link(to="/throttler") throttler
     router-view
@@ -47,6 +52,13 @@ export default Vue.extend({
     display: flex
     flex-direction: row
     justify-content: center
+
+  .header-link
+    height: 100%
+    width: auto
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
 
   .home
     justify-content: flex-start
