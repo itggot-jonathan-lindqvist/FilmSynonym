@@ -39,7 +39,6 @@
 
   .form-container
     flex-direction: column
-    height: auto
 
   .form
     display: flex
