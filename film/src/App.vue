@@ -14,7 +14,8 @@
           router-link(to="/")
             i.material-icons home
 
-        router-link(to="/throttler") throttler
+        router-link(to="/movie") movie
+        router-link(to="/throttler") | |throttler
     router-view
 
 </template>

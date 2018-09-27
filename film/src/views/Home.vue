@@ -47,7 +47,7 @@
     margin-botton: 50px
 
 
-  .search-title
+  .search-title, .movie_title
     font-family: 'Lobster'
     font-size: 180px
     color: dodgerblue
@@ -70,10 +70,9 @@
     border: none
 
   .search-text
-    height: 50%
     width: 30%
     font-size: 70px
-    font-family: 'Lobster'
+    font-family: 'Roboto'
     color: dodgerblue
     border-color: dodgerblue
     border-style: solid
