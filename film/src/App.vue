@@ -32,6 +32,9 @@ export default Vue.extend({
     margin: 0
     padding: 0
 
+  h1
+    font-family: 'Lobster'
+
   .app
     width: 100vw
     height: 100vh

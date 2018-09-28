@@ -6,7 +6,11 @@
             .title-container
                 h1.movie_title Star Wars
             .switch-container
-                h1 hej
+                .switch-container-item1
+                    .switch-container-item2
+                        h1 Change Words
+                        .switch
+                            .switch-ball
 </template>
 
 <script lang="ts">
@@ -36,6 +40,34 @@ export default Vue.extend({
 
     .switch-container
         justify-content: flex-start
+
+    .switch-container-item1
+        display: flex
+        flex-direction: row
+        justify-content: center
+        width: 50%
+        height: 100%
+
+    .switch-container-item2
+        display: flex
+        flex-direction: column
+        width: 100%
+        height: 100%
+
+    .switch
+        height: 35px
+        width: 80px
+        background-color: lightgrey
+        border-radius: 100px
+        display: flex
+        flex-direction: row
+        justify-content: flex-start
+    
+    .switch-ball
+        height: 35px
+        width: 35px
+        border-radius: 35px
+        background-color: grey
 
     .title-container
         height: 100%
