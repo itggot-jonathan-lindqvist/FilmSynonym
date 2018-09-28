@@ -6,9 +6,11 @@
         i.material-icons.search-button.value search
 
     #movies-container
-      .movie(v-for="film in movies" :key="film.id")
+      .movie(v-for="film in movies" :key="film.imdbID")
         .img
-          img(:src="film.Poster")
+          router-link(:to="film.Title")
+            img(:src="film.Poster" @click="getmovie(film.imdbID)")
+          router-view
 
 </template>
  
@@ -22,10 +24,13 @@ export default Vue.extend({
   data: () => ({
     keyword: "",
     movies: [],
+    title: "",
+    movie: [],
   }),
 
   props: {
-    msg: String
+    msg: String,
+
   },
   methods: {
     searchMovies: function() {
@@ -39,7 +44,7 @@ export default Vue.extend({
         if(response.data.Response == "True"){
           for (var i = 0; i < response.data.Search.length; i++) {
             if (response.data.Search[i].Poster != "") {
-              movies.push(response.data.Search[i]);
+              movies.push(response.data.Search[i])
             }
           }
         }else{
@@ -47,6 +52,19 @@ export default Vue.extend({
         }
       })
       this.movies = []
+      
+    },
+    getmovie: function(id:any){
+
+      console.log(this)
+      axios.get(baseurl + "&i=" + id).then((response) => {
+        console.log(response)
+        let movie = this.movie
+        movie.push(response.data)
+        
+        
+
+      })
     }
   }
 });
