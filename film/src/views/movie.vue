@@ -1,5 +1,5 @@
 <template lang="pug">
-    h1 Filmdata.movie.Title
+    Filmdata(@getmovie=movie.Title)
 </template>
 <script lang="ts">
 import Vue from 'vue'
