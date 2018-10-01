@@ -21,8 +21,8 @@ export default Vue.extend({
 
     data: ()  => ({
         isActive: false,
-        activeColor: "",
-        activeFlex: ""
+        activeColor: null,
+        activeFlex: null
     }),
 
     methods: {
@@ -33,8 +33,8 @@ export default Vue.extend({
                 this.activeFlex = "flex-end"
                 this.activeColor = "dodgerblue"
             }else{
-                this.activeFlex = ""
-                this.activeColor = ""
+                this.activeFlex = null
+                this.activeColor = null
             }
 
         }
