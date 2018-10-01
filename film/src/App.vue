@@ -4,7 +4,8 @@
     .header
       .header-item.random
         .header-link
-          i.material-icons shuffle
+          router-link(to="/movie")
+            i.material-icons shuffle
 
       .header-item
         h1.logo bMovie
@@ -14,8 +15,8 @@
           router-link(to="/")
             i.material-icons home
 
-        router-link(to="/movie") movie
-        router-link(to="/throttler") | |throttler
+        
+        router-link(to="/throttler") throttler
     router-view
 
 </template>
@@ -31,6 +32,9 @@ export default Vue.extend({
   *
     margin: 0
     padding: 0
+
+  p
+    font-family: 'Roboto'
 
   h1
     font-family: 'Lobster'
