@@ -3,13 +3,19 @@
   .app
     .header
       .header-item.random
-        i.material-icons shuffle
+        .header-link
+          router-link(to="/movie")
+            i.material-icons shuffle
+
       .header-item
         h1.logo bMovie
+
       .header-item.home
-        i.material-icons home
-        router-link(to="/") Home |
-        router-link(to="/about") About |
+        .header-link
+          router-link(to="/")
+            i.material-icons home
+
+        
         router-link(to="/throttler") throttler
     router-view
 
@@ -26,6 +32,12 @@ export default Vue.extend({
   *
     margin: 0
     padding: 0
+
+  p
+    font-family: 'Roboto'
+
+  h1
+    font-family: 'Lobster'
 
   .app
     width: 100vw
@@ -47,6 +59,13 @@ export default Vue.extend({
     display: flex
     flex-direction: row
     justify-content: center
+
+  .header-link
+    height: 100%
+    width: auto
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
 
   .home
     justify-content: flex-start
