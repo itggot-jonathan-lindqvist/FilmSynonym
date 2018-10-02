@@ -8,14 +8,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-//import Filmdata from '@/components/MovieGrid.vue'
-
 export default Vue.extend({
     name: 'Filmdata',
-    // name: 'movie',
-    // components: {
-    //   Filmdata,
-    // },
 
     props:{
         lul: Object
@@ -28,23 +22,8 @@ export default Vue.extend({
         }
     },
 
-    // const router = new VueRouter({
-    //         routes: [
-    //         // dynamic segments start with a colon
-    //         { path: '/:movie', component: Movie }
-    //                 ]
-    //         }),
     methods:{
 
-    
-        // test: function(){
-        //     console.log(this.$route.params)
-        //     console.log("hjafs")
-        //     console.log(this.lul.foo)
-        // //     //this.$emit()
-        // //     //localStorage.getItem('movie')
-        // //     //console.log(JSON.parse(movie))
-        // },
     },
 
     mounted(){
@@ -58,13 +37,6 @@ export default Vue.extend({
             this.plot = response.data.Plot
             // insert word loop here with throttler 
             this.loading = false
-        
-
-            //console.log(response)
-            //let movie = this.movie
-            //movie.push(response.data)
-            //this.movie = response.data
-            //console.log(movie)
 
         })
     }
