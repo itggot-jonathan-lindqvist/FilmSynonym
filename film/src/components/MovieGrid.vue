@@ -13,8 +13,8 @@
 </template>
  
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
+import Vue from "vue"
+import axios from "axios"
 let key = "57b31362",
   baseurl = "https://www.omdbapi.com/?apikey=" + key;
 
