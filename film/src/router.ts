@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Throttler from './views/throttler.vue'
 import Movie from './views/movie.vue'
-import MovieOld from './views/Movie.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -19,11 +18,6 @@ export default new Router({
       path: '/:movie',
       name: 'movie',
       component: Movie
-    },
-    {
-      path: '/movie',
-      name: 'movieOld',
-      component: MovieOld
     },
     {
       path: '/throttler',
