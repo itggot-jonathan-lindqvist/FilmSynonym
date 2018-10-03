@@ -8,7 +8,7 @@
         .header-item.random
           .header-link
             router-link(:to="this.title")
-              i.material-icons shuffle
+              i(@click="testing").material-icons shuffle
 
         .header-item
           h1.logo bMovie
@@ -37,6 +37,15 @@ export default Vue.extend({
       omdbID: "tt0",
       title: "",
       loading: true
+    }
+  },
+
+  methods:{
+    testing: function(){
+      window.location.href = 'http://localhost:8080/' + this.title
+      //this.loading = true
+      console.log("WHAT THE FUCK!!!")
+      //this.loading = false
     }
   },
 

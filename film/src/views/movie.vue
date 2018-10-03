@@ -33,7 +33,7 @@ export default Vue.extend({
         activeFlex: null
         }
     },
-    
+
     methods: {
         switchWords: function() {
             this.isActive = !this.isActive
@@ -44,9 +44,9 @@ export default Vue.extend({
                 this.activeFlex = null
                 this.activeColor = null
             }
-        }
+        },
     },
-    
+
     mounted(){
         console.log("Hello, I'm mounted")
         console.log(this.title)
