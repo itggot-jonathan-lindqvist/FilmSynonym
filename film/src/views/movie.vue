@@ -10,10 +10,7 @@
                     h1.movie_title {{ this.title }}
                 .switch-container
                     .switch-container-item1
-                        .switch-container-item2
-                            h1 Change Words
-                            .switch(@click="switchWords" v-class="{active: isActive}" :style="{justifyContent: activeFlex}")
-                                .switch-ball(:style="{backgroundColor: activeColor}")
+                        changeWords(v-bind:plot="plot" v-bind:title="title")
             .container-item.plot-text-container
                 p.plot-text {{ this.plot }}
 </template>
@@ -21,7 +18,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import changeWords from '@/components/ChangeWords.vue'
 export default Vue.extend({
+
+    components: {
+        changeWords
+    },
 
     data: function() {
         return {

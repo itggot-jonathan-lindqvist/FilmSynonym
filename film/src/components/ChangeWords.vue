@@ -63,7 +63,12 @@ export default Vue.extend({
                 this.activeColor = null
             }            
             
+        },
+
+        getSynonym: function() {
+            
         }
+
     }
     
 })
