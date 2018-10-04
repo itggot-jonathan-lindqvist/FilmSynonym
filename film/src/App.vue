@@ -1,29 +1,73 @@
 <template lang="pug">
   
   .app
-    .header
-      .header-item.random
-        .header-link
-          router-link(to="/movie")
-            i.material-icons shuffle
+    div(v-if="loading")
+      p it's loading
+    div(v-else)
+      .header
+        .header-item.random
+          .header-link
+            router-link(:to="this.title")
+              i(@click="testing").material-icons shuffle
 
-      .header-item
-        h1.logo bMovie
+        .header-item
+          h1.logo bMovie
 
-      .header-item.home
-        .header-link
-          router-link(to="/")
-            i.material-icons home
+        .header-item.home
+          .header-link
+            router-link(to="/")
+              i.material-icons home
 
-        
-        router-link(to="/throttler") throttler
-    router-view
+          
+          router-link(to="/throttler") throttler
+      router-view
 
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
+import axios from "axios";
+
+let key = "57b31362",
+  baseurl = "https://www.omdbapi.com/?apikey=" + key;
 export default Vue.extend({
+
+  data: function(){
+    return{
+      omdbID: "tt0",
+      title: "",
+      loading: true
+    }
+  },
+
+  methods:{
+    testing: function(){
+      window.location.href = 'http://localhost:8080/' + this.title
+      //this.loading = true
+      console.log("WHAT THE FUCK!!!")
+      //this.loading = false
+    }
+  },
+
+  mounted(){
+    this.omdbID = "tt0"
+    this.title = ""
+    console.log("Entered function movieID")
+    for ( var i = 0; i < 6; i++ ) {
+      // This will loop 6 times
+      let number = Math.floor(Math.random() * 10); 
+      let num = number.toString()
+      this.omdbID = this.omdbID  + num
+      console.log(this.omdbID)
+    }
+
+    axios.get(baseurl + "&i=" + this.omdbID).then((response) => {
+      console.log("here now")
+      console.log(response.data.Title)
+      this.title = response.data.Title
+      this.loading = false
+    })
+  }
   
 })
 </script>
