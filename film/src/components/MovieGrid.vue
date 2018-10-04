@@ -6,26 +6,36 @@
         i.material-icons.search-button.value search
 
     #movies-container
-      .movie(v-for="film in movies" :key="film.id")
+      .movie(v-for="film in movies" :key="film.imdbID")
         .img
-          img(:src="film.Poster")
+          router-link(:to="film.Title" :lul="movie")
+            img(:src="film.Poster" @click="getmovie(film.imdbID)" )
+          router-view 
+          
 
 </template>
  
 <script lang="ts">
-import Vue from "vue"
-import axios from "axios"
+// Filmdata(:lul="{foo:'foobar'}")
+import Vue from "vue";
+import axios from "axios";
+import Filmdata from '@/views/movie.vue'
+
 let key = "57b31362",
   baseurl = "https://www.omdbapi.com/?apikey=" + key;
 
 export default Vue.extend({
-  data: () => ({
-    keyword: "",
-    movies: [],
-  }),
+  components:{
+    Filmdata
+  },
 
-  props: {
-    msg: String
+  data: function(){
+    return {
+      keyword: "",
+      movies: [],
+      title: "",
+      movie: {},
+    }
   },
   methods: {
     searchMovies: function() {
@@ -39,7 +49,7 @@ export default Vue.extend({
         if(response.data.Response == "True"){
           for (var i = 0; i < response.data.Search.length; i++) {
             if (response.data.Search[i].Poster != "") {
-              movies.push(response.data.Search[i]);
+              movies.push(response.data.Search[i])
             }
           }
         }else{
@@ -47,6 +57,19 @@ export default Vue.extend({
         }
       })
       this.movies = []
+      
+    },
+     getmovie: function(id:any){
+    //   console.log("yis")
+    //   console.log(this)
+    //   axios.get(baseurl + "&i=" + id).then((response) => {
+    //     //console.log(response)
+    //     //let movie = this.movie
+    //     //movie.push(response.data)
+    //     this.movie = response.data
+    //     //console.log(movie)
+
+    //   })
     }
   }
 });
