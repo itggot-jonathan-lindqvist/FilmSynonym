@@ -10,7 +10,7 @@
                     h1.movie_title {{ this.title }}
                 .switch-container
                     .switch-container-item1
-                        changeWords(v-bind:plot="plot" v-bind:title="title")
+                        changeWords(v-bind:plot="plot" v-bind:title="title" v-on:changeWords="switchWords($event)")
             .container-item.plot-text-container
                 p.plot-text {{ this.plot }}
 </template>
@@ -28,25 +28,17 @@ export default Vue.extend({
     data: function() {
         return {
         title: this.$route.params.movie,
+        newTitle: "",
         loading: true,
         plot: "",
-        isActive: false,
-        activeColor: null,
-        activeFlex: null
+        newPlot: ""
         }
     },
     
     methods: {
-        switchWords: function() {
-            this.isActive = !this.isActive
-            if (this.isActive == true) {
-                this.activeFlex = "flex-end"
-                this.activeColor = "dodgerblue"
-            }else{
-                this.activeFlex = null
-                this.activeColor = null
-            }
-        }
+        switchWords: function(changedTitle) {
+            this.title = changedTitle
+        },
     },
     
     mounted(){

@@ -60,16 +60,6 @@ export default Vue.extend({
       
     },
      getmovie: function(id:any){
-    //   console.log("yis")
-    //   console.log(this)
-    //   axios.get(baseurl + "&i=" + id).then((response) => {
-    //     //console.log(response)
-    //     //let movie = this.movie
-    //     //movie.push(response.data)
-    //     this.movie = response.data
-    //     //console.log(movie)
-
-    //   })
     }
   }
 });
