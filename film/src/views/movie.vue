@@ -23,6 +23,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import changeWords from '@/components/switch.vue'
 import {getSynonym} from '../api'
+import {switchWords} from '../methods'
 
 export default Vue.extend({
 
@@ -53,13 +54,15 @@ export default Vue.extend({
 
             if (this.isUsed && isActive) {
                 this.title = this.originalTitle
+                this.plot = this.originalPlot
 
             }else if (this.isUsed && isActive == false){
                 this.title = this.newTitle
+                this.plot = this.newPlot
 
             } else {
 
-                this.isActive = !this.isActive
+                ////TITLE
                 let title = this.title.split(/[.,':\/ -]/)
                 let titleWords = []
                 
@@ -71,53 +74,34 @@ export default Vue.extend({
 
                 Promise.all(titleWords)
                 .then((response) => {
-                    let title = this.title.split(" ")
-                    let response_index = 0
-
-                    console.log(response)
-                    console.log(title)
-
-                    for (let index = 0; index < title.length; index++) {
-                        if (typeof response[response_index] === 'undefined') {
-                            response_index++
-                        }else if (/[.,':\/-]/.test(title[index]) && /[A-Za-z]/.test(title[index])) {
-                            let word = title[index].split("")
-                            let i = 1
-                            while (/[.,':\/ -]/.test(word[i]) == false) {
-                                word[0] = word[0] + word[i]
-                                word[i] = ""
-                                i++
-                            }
-
-                            word[0] = response[response_index]
-
-                            for (let i = 1; i < word.length; i++) {
-                                word[0] = word[0] + word[i]
-                            }
-
-                            title[index] = word[0]
-                            response_index++
-                        }else if (/[.,':\/-]/.test(title[index])) {
-                        }else {
-                            title[index] = response[response_index]
-                            response_index++
-                        }
-                    }
-
-                    let newTitle = ""
-
-                    for (let index = 0; index < title.length; index++) {
-                        newTitle = newTitle + title[index]
-                        if (index == title.legnth - 1) {
-                        }else{
-                            newTitle += " "
-                        }
-                    }
+                    
+                    let newTitle = switchWords(response, this.title)
 
                     this.title = newTitle
                     this.newTitle = newTitle
                 })
                 .catch(console.log)
+
+                ////PLOT
+                let plot = this.plot.split(/[.,':\/ -]/)
+                let plotWords = []
+
+                for (let index = 0; index < plot.length; index++) {
+                    if (plot[index] != "") {
+                        plotWords.push(getSynonym(plot[index]))
+                    }
+                }
+
+                Promise.all(plotWords)
+                .then((response) => {
+                    
+                    let newPlot = switchWords(response, this.plot)
+
+                    this.plot = newPlot
+                    this.newPlot = newPlot
+                })
+                .catch(console.log)
+
 
                 this.isUsed = true
 
