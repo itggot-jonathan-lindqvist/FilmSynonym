@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Throttler from './views/throttler.vue'
 import Movie from './views/movie.vue'
+import quiz from './views/quiz.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -20,9 +21,14 @@ export default new Router({
       component: Movie
     },
     {
-      path: '/throttler',
+      path: '/throttler/throttler',
       name: 'throttler',
       component: Throttler
+    },
+    {
+      path: '/quiz/quiz',
+      name: 'quiz',
+      component: quiz
     },
   ]
 })

@@ -19,7 +19,8 @@
               i.material-icons home
 
           
-          router-link(to="/throttler") throttler
+          router-link(to="/throttler/throttler") throttler
+          router-link(to="/quiz/quiz") quiz
       router-view
 
 </template>
