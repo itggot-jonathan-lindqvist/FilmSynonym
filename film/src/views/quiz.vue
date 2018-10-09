@@ -11,7 +11,7 @@
                 .card-body                                         
                     p.card-text.text-center.lead {{Plot}}
             .col-m-12.text-center          
-                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5(disabled = true) NEXT
+                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5.disabled(role="button" aria-disabled="true") NEXT
             
 
 
@@ -65,6 +65,7 @@ export default Vue.extend({
       let rand = Math.floor(Math.random() * 3)
       console.log(rand)
       console.log(this.movieIds)
+      console.log(this.movieIds.length)
       axios.get(baseurl + "&t=" + this.movieIds[rand]).then(response => {
         console.log("test")
         console.log(this.movieIds[rand])
