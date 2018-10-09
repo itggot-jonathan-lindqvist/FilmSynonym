@@ -8,7 +8,7 @@ function getSynonym(word:String) : Promise<String> {
         axios({
             method:'get',
             url: url,
-            headers: {'X-Mashape-Key': 'jo1yKAzUuHmshbgi84oBycgJNyxjp1ksuV8jsnVCC9lm0pJaqD'},
+            headers: {'X-Mashape-Key': '<API-KEY>'},
         }).then((response) => {
             
             let synonyms = response.data.synonyms

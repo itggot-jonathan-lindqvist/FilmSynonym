@@ -13,7 +13,6 @@
                         .switch-container-item2
                             h1 Change Words
                             changeWords(v-on:active="changeWords($event)" :class="{used: isUsed}")
-                            //- (@click="changeWords" :class="{used: isUsed, active: isActive}")
             .container-item.plot-text-container
                 p.plot-text {{ this.plot }}
 </template>
