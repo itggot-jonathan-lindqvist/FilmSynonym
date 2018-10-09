@@ -10,7 +10,10 @@
                     h1.movie_title {{ this.title }}
                 .switch-container
                     .switch-container-item1
-                        changeWords(v-bind:plot="plot" v-bind:title="title" v-on:changeWords="switchWords($event)")
+                        .switch-container-item2
+                            h1 Change Words
+                            changeWords(v-on:active="changeWords($event)" :class="{used: isUsed}")
+                            //- (@click="changeWords" :class="{used: isUsed, active: isActive}")
             .container-item.plot-text-container
                 p.plot-text {{ this.plot }}
 </template>
@@ -18,7 +21,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
-import changeWords from '@/components/ChangeWords.vue'
+import changeWords from '@/components/switch.vue'
+import {getSynonym} from '../api'
+
 export default Vue.extend({
 
     components: {
@@ -27,32 +32,113 @@ export default Vue.extend({
 
     data: function() {
         return {
-        title: this.$route.params.movie,
+
+        isUsed: false,
+        
+        title: "",
         newTitle: "",
-        loading: true,
+        originalTitle: "",
+
         plot: "",
-        newPlot: ""
+        newPlot: "",
+        originalPlot: "",
+
+        loading: true,
         }
     },
     
     methods: {
-        switchWords: function(changedTitle) {
-            this.title = changedTitle
-        },
+
+        changeWords: function(isActive) {
+
+            if (this.isUsed && isActive) {
+                this.title = this.originalTitle
+
+            }else if (this.isUsed && isActive == false){
+                this.title = this.newTitle
+
+            } else {
+
+                this.isActive = !this.isActive
+                let title = this.title.split(/[.,':\/ -]/)
+                let titleWords = []
+                
+                for (let index = 0; index < title.length; index++) {
+                    if (title[index] != "") {
+                        titleWords.push(getSynonym(title[index]))
+                    }
+                }
+
+                Promise.all(titleWords)
+                .then((response) => {
+                    let title = this.title.split(" ")
+                    let response_index = 0
+
+                    console.log(response)
+                    console.log(title)
+
+                    for (let index = 0; index < title.length; index++) {
+                        if (typeof response[response_index] === 'undefined') {
+                            response_index++
+                        }else if (/[.,':\/-]/.test(title[index]) && /[A-Za-z]/.test(title[index])) {
+                            let word = title[index].split("")
+                            let i = 1
+                            while (/[.,':\/ -]/.test(word[i]) == false) {
+                                word[0] = word[0] + word[i]
+                                word[i] = ""
+                                i++
+                            }
+
+                            word[0] = response[response_index]
+
+                            for (let i = 1; i < word.length; i++) {
+                                word[0] = word[0] + word[i]
+                            }
+
+                            title[index] = word[0]
+                            response_index++
+                        }else if (/[.,':\/-]/.test(title[index])) {
+                        }else {
+                            title[index] = response[response_index]
+                            response_index++
+                        }
+                    }
+
+                    let newTitle = ""
+
+                    for (let index = 0; index < title.length; index++) {
+                        newTitle = newTitle + title[index]
+                        if (index == title.legnth - 1) {
+                        }else{
+                            newTitle += " "
+                        }
+                    }
+
+                    this.title = newTitle
+                    this.newTitle = newTitle
+                })
+                .catch(console.log)
+
+                this.isUsed = true
+
+            }
+        }
+
     },
     
     mounted(){
-        console.log("Hello, I'm mounted")
-        console.log(this.title)
         let key = "57b31362",
-            baseurl = "https://www.omdbapi.com/?apikey=" + key;
-        axios.get(baseurl + "&t=" + this.title).then((response) => {
-            console.log("here")
-            console.log(response.data.Plot)
-            this.plot = response.data.Plot
-            // insert word loop here with throttler 
-            this.loading = false
+        baseurl = "https://www.omdbapi.com/?apikey=" + key
 
+        this.title = this.$route.params.movie
+        this.originalTitle = this.$route.params.movie
+        
+        axios.get(baseurl + "&t=" + this.title).then((response) => {
+
+            this.plot = response.data.Plot
+            this.originalPlot = response.data.Plot
+           
+            this.loading = false
         })
     }
     
