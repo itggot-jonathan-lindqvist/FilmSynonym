@@ -46,7 +46,7 @@ export default Vue.extend({
         loading: true,
         }
     },
-    
+
     methods: {
 
         changeWords: function(isActive) {
@@ -106,9 +106,8 @@ export default Vue.extend({
 
             }
         }
-
     },
-    
+
     mounted(){
         let key = "57b31362",
         baseurl = "https://www.omdbapi.com/?apikey=" + key
