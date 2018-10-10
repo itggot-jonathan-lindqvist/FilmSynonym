@@ -53,25 +53,46 @@ export default Vue.extend({
       //this.loading = false
     },
     changeTheme: function(){
-      console.log("HSDAKSLDHL")
-
-      this.headerColor = "black"
-      this.appColor = "Black"
-      this.searchTitleColor = "#8d2663"
-      this.theme = true
-      console.log("cancer")
-      console.log(this.$children[3].$data)
-      console.log(this.$children[3])
-      console.log(this.$children[3].$children[0])
-      if(this.$children[3].$vnode.tag != "vue-component-2"){
-
-        this.$children[3].$data.searchTitleColor = "#8d2663"
-        this.$children[3].$children[0].$data.borderColor = "#8d2663"
-        this.$children[3].$children[0].$data.inputColor = "#8d2663"
-        this.$children[3].$children[0].$data.backgroundColor = "black"
+      // console.log("HSDAKSLDHL")
+      if(this.theme == false){
+        this.headerColor = "black"
+        this.appColor = "Black"
+        this.searchTitleColor = "#8d2663"
+        this.theme = true
+        // console.log("cancer")
+        // console.log(this.$children[3].$data)
+        // console.log(this.$children[3])
+        // console.log(this.$children[3].$children[0])
+        if(this.$children[3].$vnode.tag != "vue-component-2"){
+  
+          this.$children[3].$data.searchTitleColor = "#8d2663"
+          this.$children[3].$children[0].$data.borderColor = "#8d2663"
+          this.$children[3].$children[0].$data.inputColor = "#8d2663"
+          this.$children[3].$children[0].$data.backgroundColor = "black"
+        }else{
+          this.$children[3].$data.movieColor = "#8d2663"
+          this.$children[3].$data.plotColor = "white"
+        }
       }else{
-        this.$children[3].$data.movieColor = "#8d2663"
-        this.$children[3].$data.plotColor = "white"
+        //here
+        this.headerColor = "DodgerBlue"
+        this.appColor = "white"
+        this.theme = false
+        // console.log("cancer")
+        // console.log(this.$children[3].$data)
+        // console.log(this.$children[3])
+        // console.log(this.$children[3].$children[0])
+        if(this.$children[3].$vnode.tag != "vue-component-2"){
+  
+          this.$children[3].$data.searchTitleColor = "DodgerBlue"
+          this.$children[3].$children[0].$data.borderColor = "DodgerBlue"
+          this.$children[3].$children[0].$data.inputColor = "DodgerBlue"
+          this.$children[3].$children[0].$data.backgroundColor = "white"
+        }else{
+          this.$children[3].$data.movieColor = "DodgerBlue"
+          this.$children[3].$data.plotColor = "black"
+        }
+
       }
     }
   },

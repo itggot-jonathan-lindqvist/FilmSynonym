@@ -30,11 +30,13 @@
          } 
     },
     mounted(){
-      console.log(this.$parent.$data)
-      if (this.$parent.$data.theme == false){}else{
-      this.$children[0].$data.borderColor = "#8d2663"
-      this.$children[0].$data.inputColor = "#8d2663"
-      this.$children[0].$data.backgroundColor = "black"
+      //console.log(this.$parent.$data)
+      if (this.$parent.$data.theme == false){
+        this.searchTitleColor ="DodgerBlue"
+      }else{
+        this.$children[0].$data.borderColor = "#8d2663"
+        this.$children[0].$data.inputColor = "#8d2663"
+        this.$children[0].$data.backgroundColor = "black"
       }
     }
   })
