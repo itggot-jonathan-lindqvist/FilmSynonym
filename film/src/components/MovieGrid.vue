@@ -16,18 +16,11 @@
 </template>
  
 <script lang="ts">
-// Filmdata(:lul="{foo:'foobar'}")
 import Vue from "vue";
 import axios from "axios";
-import Filmdata from '@/views/movie.vue'
-
-let key = "57b31362",
-  baseurl = "https://www.omdbapi.com/?apikey=" + key;
+import {getMovies} from '../api'
 
 export default Vue.extend({
-  components:{
-    Filmdata
-  },
 
   data: function(){
     return {
@@ -39,23 +32,13 @@ export default Vue.extend({
   },
   methods: {
     searchMovies: function() {
-      let keyword = this.keyword;
-      console.log("hej");
-      console.log(baseurl + "&s=" + keyword.replace(" ", "+"));
 
-      axios.get(baseurl + "&s=" + keyword.replace(" ", "+")).then((response) => {
-      let movies = this.movies
-        console.log(response.data.Response)
-        if(response.data.Response == "True"){
-          for (var i = 0; i < response.data.Search.length; i++) {
-            if (response.data.Search[i].Poster != "") {
-              movies.push(response.data.Search[i])
-            }
-          }
-        }else{
-          console.log("404")
-        }
-      })
+      getMovies(this.keyword).then((response) => {
+        console.log(response)
+        this.movies = response
+      }).catch(console.log)
+
+
       this.movies = []
       
     },
@@ -65,7 +48,6 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="sass" scoped>
 
 body, html
