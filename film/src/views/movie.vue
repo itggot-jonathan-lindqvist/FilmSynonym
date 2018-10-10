@@ -73,7 +73,7 @@ export default Vue.extend({
 
         })
         console.log("what")
-        console.log(this.$parent.$data)
+        console.log(this.$parent)
         if (this.$parent.$data.theme == false){}else{
         this.movieColor = "#8d2663"
         this.plotColor = "white"

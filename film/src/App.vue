@@ -31,11 +31,7 @@ import axios from "axios";
 
 let key = "57b31362",
   baseurl = "https://www.omdbapi.com/?apikey=" + key;
-//import child from '@/views/Home.vue'
 export default Vue.extend({
-  // components:{
-  //   child
-  // },
 
   data: function(){
     return{
@@ -66,36 +62,17 @@ export default Vue.extend({
       console.log("cancer")
       console.log(this.$children[3].$data)
       console.log(this.$children[3])
-      console.log(this.$children[3].$children[0].$data)
-      this.$children[3].$data.searchTitleColor = "#8d2663"
-      this.$children[3].$children[0].$data.borderColor = "#8d2663"
-      this.$children[3].$children[0].$data.inputColor = "#8d2663"
-      this.$children[3].$children[0].$data.backgroundColor = "black"
-      //this.$root.$children[0].omegalul()
+      console.log(this.$children[3].$children[0])
+      if(this.$children[3].$vnode.tag != "vue-component-2"){
 
-      // let element = document.getElementById("app")
-      // element.classList.toggle("app-dark")
-
-      // let headerdark = document.getElementById("header")
-      // headerdark.classList.toggle("header-dark")
-
-      // console.log("BEFORE") //after this it wont log but still finds the classes
-
-      // let containerdark = document.getElementById("searchtitle")
-      // containerdark.classList.toggle("container-dark")
-      
-      // let searchtextdark = document.getElementById("searchtext")
-      // searchtextdark.classList.toggle("searchtext-dark")
-      
-      // let searchbtndark = document.getElementById("searchbtn")
-      // searchbtndark.classList.toggle("searchbtn-dark")
-
-      // let searchbtndark2 = document.getElementById("searchbtn2")
-      // searchbtndark2.classList.toggle("searchbtn-dark")
-
-      // let plotdark = document.getElementById("plot") // cant find id element
-      // plotdark.classList.toggle("goback-dark")
-
+        this.$children[3].$data.searchTitleColor = "#8d2663"
+        this.$children[3].$children[0].$data.borderColor = "#8d2663"
+        this.$children[3].$children[0].$data.inputColor = "#8d2663"
+        this.$children[3].$children[0].$data.backgroundColor = "black"
+      }else{
+        this.$children[3].$data.movieColor = "#8d2663"
+        this.$children[3].$data.plotColor = "white"
+      }
     }
   },
 
