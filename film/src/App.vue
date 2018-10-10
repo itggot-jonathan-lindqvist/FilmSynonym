@@ -30,8 +30,6 @@ import Vue from 'vue'
 import axios from "axios";
 import {getRandMovie} from './api'
 
-let key = "57b31362",
-  baseurl = "https://www.omdbapi.com/?apikey=" + key;
 export default Vue.extend({
 
   data: function(){
