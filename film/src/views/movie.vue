@@ -11,7 +11,7 @@
                 .switch-container
                     .switch-container-item1
                         .switch-container-item2
-                            h1 Change Words
+                            h1(:style="{color: plotColor}") Change Words
                             .switch(@click="switchWords" v-class="{active: isActive}" :style="{justifyContent: activeFlex}")
                                 .switch-ball(:style="{backgroundColor: activeColor}")
             .container-item.plot-text-container
