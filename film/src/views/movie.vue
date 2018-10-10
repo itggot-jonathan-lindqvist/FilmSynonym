@@ -5,9 +5,9 @@
         div(v-else)
             .container-item
                 .go_back-container
-                    i.material-icons.go_back#goback123 arrow_back
+                    i(:style="{color: plotColor}").material-icons.go_back#goback123 arrow_back
                 .title-container
-                    h1.movie_title {{ this.title }}
+                    h1(:style="{color: movieColor}").movie_title {{ this.title }}
                 .switch-container
                     .switch-container-item1
                         .switch-container-item2
@@ -15,7 +15,7 @@
                             .switch(@click="switchWords" v-class="{active: isActive}" :style="{justifyContent: activeFlex}")
                                 .switch-ball(:style="{backgroundColor: activeColor}")
             .container-item.plot-text-container
-                p.plot-text#plot {{ this.plot }}
+                p(:style="{color: plotColor}").plot-text#plot {{ this.plot }}
 </template>
 
 <script lang="ts">
@@ -30,19 +30,31 @@ export default Vue.extend({
         plot: "",
         isActive: false,
         activeColor: null,
-        activeFlex: null
+        activeFlex: null,
+        movieColor: "",
+        plotColor: "",
         }
     },
 
     methods: {
         switchWords: function() {
             this.isActive = !this.isActive
-            if (this.isActive == true) {
-                this.activeFlex = "flex-end"
-                this.activeColor = "dodgerblue"
+            if(this.$parent.$data.theme == false){
+                if (this.isActive == true) {
+                    this.activeFlex = "flex-end"
+                    this.activeColor = "dodgerblue"
+                }else{
+                    this.activeFlex = null
+                    this.activeColor = null
+                }
             }else{
-                this.activeFlex = null
-                this.activeColor = null
+                if (this.isActive == true) {
+                    this.activeFlex = "flex-end"
+                    this.activeColor = "#8d2663"
+                }else{
+                    this.activeFlex = null
+                    this.activeColor = null
+                }
             }
         },
     },
@@ -60,6 +72,13 @@ export default Vue.extend({
             this.loading = false
 
         })
+        console.log("what")
+        console.log(this.$parent.$data)
+        if (this.$parent.$data.theme == false){}else{
+        this.movieColor = "#8d2663"
+        this.plotColor = "white"
+        //this.$children[0].$data.backgroundColor = "black"
+        }
     }
     
 })

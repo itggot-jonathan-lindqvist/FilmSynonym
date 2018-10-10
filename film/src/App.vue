@@ -44,7 +44,8 @@ export default Vue.extend({
       loading: true,
       headerColor: "",
       appColor: "",
-      searchTitleColor: ""
+      searchTitleColor: "",
+      theme: false
     }
   },
 
@@ -61,6 +62,7 @@ export default Vue.extend({
       this.headerColor = "black"
       this.appColor = "Black"
       this.searchTitleColor = "#8d2663"
+      this.theme = true
       console.log("cancer")
       console.log(this.$children[3].$data)
       console.log(this.$children[3])
