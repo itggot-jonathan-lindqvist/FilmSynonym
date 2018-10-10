@@ -1,9 +1,9 @@
 <template lang="pug">
   .container-item.form-container
     .form
-      input(type="text" v-model="keyword" @keyup.enter="searchMovies()").search-text
-      button(@click="searchMovies").search-button
-        i.material-icons.search-button.value search
+      input(type="text" v-model="keyword" @keyup.enter="searchMovies()" :style="{color: inputColor, borderColor: borderColor, backgroundColor: backgroundColor }").search-text#searchtext
+      button(@click="searchMovies" :style="{color: inputColor, borderColor: borderColor, backgroundColor: backgroundColor}").search-button#searchbtn 
+        i(:style="{color: inputColor, backgroundColor: backgroundColor}").material-icons.search-button#searchbtn2.value search
 
     #movies-container
       .movie(v-for="film in movies" :key="film.imdbID")
@@ -35,6 +35,9 @@ export default Vue.extend({
       movies: [],
       title: "",
       movie: {},
+      inputColor: "",
+      borderColor: "",
+      backgroundColor: "",
     }
   },
   methods: {

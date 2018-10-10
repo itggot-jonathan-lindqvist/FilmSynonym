@@ -1,11 +1,11 @@
 <template lang="pug">
-    .container
+    .container#test
         div(v-if="loading")
             p it's loading
         div(v-else)
             .container-item
                 .go_back-container
-                    i.material-icons.go_back arrow_back
+                    i.material-icons.go_back#goback123 arrow_back
                 .title-container
                     h1.movie_title {{ this.title }}
                 .switch-container
@@ -15,7 +15,7 @@
                             .switch(@click="switchWords" v-class="{active: isActive}" :style="{justifyContent: activeFlex}")
                                 .switch-ball(:style="{backgroundColor: activeColor}")
             .container-item.plot-text-container
-                p.plot-text {{ this.plot }}
+                p.plot-text#plot {{ this.plot }}
 </template>
 
 <script lang="ts">
@@ -124,6 +124,5 @@ export default Vue.extend({
     .plot-text
         margin-left: 25%
         margin-right: 25%
-    
 
 </style>

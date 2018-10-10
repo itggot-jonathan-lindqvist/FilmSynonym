@@ -1,7 +1,7 @@
 <template lang="pug">
   .container
     .container-item.title
-      h1.search-title Search
+      h1.search-title(:style="{color: searchTitleColor}") Search
     movieGrid
       
 
@@ -15,6 +15,20 @@
     components: {
       movieGrid,
     },
+
+
+    data: function() {
+      return{
+        searchTitleColor: this.$parent.$data.searchTitleColor,
+        render: true
+      }
+    },
+
+    watch:{ 
+      searchTitleColor: function(val){
+          console.log("help me!")
+         } 
+    }
   })
 </script>
 
