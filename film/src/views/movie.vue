@@ -22,6 +22,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import changeWords from '@/components/switch.vue'
 import {getSynonym} from '../api'
+import {getMovies} from '../api'
+import {getMovie} from '../api'
 import {switchWords} from '../methods'
 
 export default Vue.extend({
@@ -109,19 +111,16 @@ export default Vue.extend({
     },
 
     mounted(){
-        let key = "57b31362",
-        baseurl = "https://www.omdbapi.com/?apikey=" + key
 
         this.title = this.$route.params.movie
         this.originalTitle = this.$route.params.movie
-        
-        axios.get(baseurl + "&t=" + this.title).then((response) => {
 
-            this.plot = response.data.Plot
-            this.originalPlot = response.data.Plot
-           
+        getMovie(this.title).then((response) => {
+            this.plot = response
+            this.originalPlot = response
             this.loading = false
-        })
+        }).catch(console.log)
+  
     }
     
 })
