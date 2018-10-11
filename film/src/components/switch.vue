@@ -23,7 +23,7 @@ export default Vue.extend({
         change: function() {
             this.$emit('active', this.isActive)
             this.isActive = !this.isActive  
-            if(this.$parent.$data.theme == false){
+            if(this.$parent.$parent.$data.theme == false){
                 if (this.isActive == true) {
                     this.activeFlex = "flex-end"
                     this.activeColor = "dodgerblue"
