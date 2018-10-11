@@ -30,7 +30,6 @@
          } 
     },
     mounted(){
-      //console.log(this.$parent.$data)
       if (this.$parent.$data.theme == false){
         this.searchTitleColor ="DodgerBlue"
       }else{
@@ -56,11 +55,7 @@
     display: flex
     flex-direction: row
     justify-content: center
-    // background-color: red
-    // border-width: 2px
-    // border-color: blue
-    // border-type: solid
-
+    
   .form-container
     flex-direction: column
 
