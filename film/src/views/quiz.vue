@@ -4,7 +4,7 @@
         div(v-if="start")
             .btn-primary.btn-lg.btn.btn-block(@click="start=false, getmovie()" type="button") START
         div(v-else)
-            ul.list-group.shadow-lg.p-3.mb-5.bg-white.rounded()
+            ul.list-group.shadow-lg.p-3.mb-5.bg-white.rounded(v-for=" i in 4" )
                 //- div(v-if="rightAnswer =")     
                            
                 .btn.btn-group-vertical.blockquote.list-group-item-action.active(v-for="(movie,index) in movieIds" ) {{movie}}
@@ -12,7 +12,8 @@
                 .card-body                                         
                     p.card-text.text-center.lead {{Plot}}
             .col-m-12.text-center          
-                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5  NEXT
+                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5(type="button" onclick="smoothScroll(document.getElementById('second'))")  NEXT
+            
             
 
 
@@ -37,6 +38,7 @@ export default Vue.extend({
       title: "",
       Plot: "",
       // show: false,
+ 
     };
   },
 
@@ -48,94 +50,39 @@ export default Vue.extend({
 
   methods: {
     getmovie() {
-      let titles = new Promise((resolve, reject) => {
-        for (let i = 0; i < 4; i++) {
-          this.omdbID = "tt0";
-          this.title = "";
-          // console.log("Entered function movieID");
-          for (let y = 0; y < 6; y++) {
-            // This will loop 6 times
-            let number = Math.floor(Math.random() * 10);
-            let num = number.toString();
-            this.omdbID = this.omdbID + num;
-            // console.log(this.omdbID);
-          }
-
-          axios.get(baseurl + "&i=" + this.omdbID).then(response => {
-            // console.log("here now");
-            // console.log(response.data.Title);
-            this.movieIds.push(response.data.Title)
-             // fungerar men står fel
-          });
-        }
-        console.log(this.movieIds)
-        console.log()
-        resolve(this.movieIds)
-      })
-      titles.then(response => {
-        let rand = Math.floor(Math.random() * 3);
-        console.log(rand);
-        console.log(this.movieIds.length);
-        console.log()
-        for (let index = 0; index < this.movieIds.length; index++) {
-          console.log(this.movieIds[index]);
-          
-        }
+      
+      
         
-        console.log(rand)
-        // axios.get(baseurl + "&t=" + this.movieIds[rand]).then(response => {
-        //   console.log("test")
-        //   console.log(this.movieIds[rand])
-        //   console.log("test")
-        //   this.rightAnswer = this.movieIds[rand]
-        //   this.Plot = response.data.Plot
-        // })
-      });
     },
-    getPlot() {
-      Promise.all(this.movieIds).then(response =>{
-        let rand = Math.floor(Math.random() * 3);
-        console.log(rand);
-        console.log(response)
-
-        let eArr = this.movieIds[Symbol.iterator]();
-        console.log(eArr.next().value);
-        console.log(response)
-        console.log(this.movieIds)
-        console.log(response)
-        console.log(rand)
-        // axios.get(baseurl + "&t=" + this.movieIds[rand]).then(response => {
-        //   console.log("test")
-        //   console.log(this.movieIds[rand])
-        //   console.log("test")
-        //   this.rightAnswer = this.movieIds[rand]
-        //   this.Plot = response.data.Plot
-        // })
-      });
+    smoothScroll(target:any){
+    let scrollContainer = target;
+    do { //find scroll container
+        scrollContainer = scrollContainer.parentNode;
+        if (!scrollContainer) return;
+        scrollContainer.scrollTop += 1;
+    } while (scrollContainer.scrollTop == 0);
+    
+    let targetY = 0;
+    do { //find the top of target relatively to the container
+        if (target == scrollContainer) break;
+        targetY += target.offsetTop;
+    } while (target = target.offsetParent);
+    
+    let scroll = function(c, a, b, i) {
+        i++; if (i > 30) return;
+        c.scrollTop = a + (b - a) / 30 * i;
+        setTimeout(function(){ scroll(c, a, b, i); }, 20);
+    }
+    // start scrolling
     }
   }
-});
+})
+
 </script>
 
 
 <style lang="sass">
 
-    // .titles
-    //     width: 100%
-    //     heigth: 30vh
-    //     margin: auto
-        
-    // .plot
-    //     width: 100%
-    //     heigth: 30vh
-    //     margin: auto
-    //  #btn
-    //     background: #456
-    //     padding: 10px
-    //    margin: auto
-
-    // div
-    //     width: 100%
 
 
 
