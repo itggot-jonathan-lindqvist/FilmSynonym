@@ -1,17 +1,18 @@
 <template lang="pug">
   
-  .app
+  .app(:style="{backgroundColor: appColor}")
     div(v-if="loading")
       p it's loading
+      p f
     div(v-else)
-      .header
+      .header(:style="{backgroundColor: headerColor}")
         .header-item.random
           .header-link
             router-link(:to="this.title")
               i(@click="testing").material-icons shuffle
 
         .header-item
-          h1.logo bMovie
+          h1.logo(@click="changeTheme" ref="bmovie") bMovie
 
         .header-item.home
           .header-link
@@ -36,7 +37,11 @@ export default Vue.extend({
   data: function(){
     return{
       title: "",
-      loading: true
+      loading: true,
+      headerColor: "",
+      appColor: "",
+      searchTitleColor: "",
+      theme: false
     }
   },
 
@@ -46,6 +51,49 @@ export default Vue.extend({
       //this.loading = true
       console.log("WHAT THE FUCK!!!")
       //this.loading = false
+    },
+    changeTheme: function(){
+      // console.log("HSDAKSLDHL")
+      if(this.theme == false){
+        this.headerColor = "black"
+        this.appColor = "Black"
+        this.searchTitleColor = "#8d2663"
+        this.theme = true
+        // console.log("cancer")
+        // console.log(this.$children[3].$data)
+        // console.log(this.$children[3])
+        // console.log(this.$children[3].$children[0])
+        if(this.$children[3].$vnode.tag != "vue-component-2"){
+  
+          this.$children[3].$data.searchTitleColor = "#8d2663"
+          this.$children[3].$children[0].$data.borderColor = "#8d2663"
+          this.$children[3].$children[0].$data.inputColor = "#8d2663"
+          this.$children[3].$children[0].$data.backgroundColor = "black"
+        }else{
+          this.$children[3].$data.movieColor = "#8d2663"
+          this.$children[3].$data.plotColor = "white"
+        }
+      }else{
+        //here
+        this.headerColor = "DodgerBlue"
+        this.appColor = "white"
+        this.theme = false
+        // console.log("cancer")
+        // console.log(this.$children[3].$data)
+        // console.log(this.$children[3])
+        // console.log(this.$children[3].$children[0])
+        if(this.$children[3].$vnode.tag != "vue-component-2"){
+  
+          this.$children[3].$data.searchTitleColor = "DodgerBlue"
+          this.$children[3].$children[0].$data.borderColor = "DodgerBlue"
+          this.$children[3].$children[0].$data.inputColor = "DodgerBlue"
+          this.$children[3].$children[0].$data.backgroundColor = "white"
+        }else{
+          this.$children[3].$data.movieColor = "DodgerBlue"
+          this.$children[3].$data.plotColor = "black"
+        }
+
+      }
     }
   },
 
@@ -86,6 +134,24 @@ export default Vue.extend({
     min-height: 100px
     max-height: 100px
 
+  // .app-dark
+  //   background-color: black
+  // .header-dark
+  //   background-color: black
+  // .container-dark
+  //   color: #8d2663 !important
+  // .searchtext-dark
+  //   color: #8d2663 !important
+  //   background-color: black 
+  //   border-color: #8d2663 !important
+  // .searchbtn-dark
+  //   background-color: black !important
+  //   border-color: #8d2663 !important
+  //   color: #8d2663 !important
+  // .goback-dark
+  //   color: white !important
+  //   background-color: red
+
   .header-item
     width: 33%
     height: 100%
@@ -110,6 +176,7 @@ export default Vue.extend({
     font-family: 'Lobster'
     font-size: 90px
     color: white
+    cursor: pointer
 
   .material-icons
     font-family: 'Material Icons'
