@@ -127,7 +127,6 @@ export default Vue.extend({
         if (this.$parent.$data.theme == false){}else{
         this.movieColor = "#8d2663"
         this.plotColor = "white"
-        //this.$children[0].$data.backgroundColor = "black"
         }
 
         this.title = this.$route.params.movie
