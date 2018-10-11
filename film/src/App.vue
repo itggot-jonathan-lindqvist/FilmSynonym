@@ -63,7 +63,7 @@ export default Vue.extend({
         // console.log(this.$children[3].$data)
         // console.log(this.$children[3])
         // console.log(this.$children[3].$children[0])
-        if(this.$children[3].$vnode.tag != "vue-component-2"){
+        if(this.$children[3].$vnode.tag != "vue-component-6"){
   
           this.$children[3].$data.searchTitleColor = "#8d2663"
           this.$children[3].$children[0].$data.borderColor = "#8d2663"
@@ -82,7 +82,7 @@ export default Vue.extend({
         // console.log(this.$children[3].$data)
         // console.log(this.$children[3])
         // console.log(this.$children[3].$children[0])
-        if(this.$children[3].$vnode.tag != "vue-component-2"){
+        if(this.$children[3].$vnode.tag != "vue-component-6"){
   
           this.$children[3].$data.searchTitleColor = "DodgerBlue"
           this.$children[3].$children[0].$data.borderColor = "DodgerBlue"
