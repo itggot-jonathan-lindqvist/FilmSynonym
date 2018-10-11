@@ -50,10 +50,12 @@ export default Vue.extend({
 
   mounted(){
     
-    getRandMovie().then((response) => {
-      this.title = response
-      this.loading = false
-    }).catch(console.log)
+    // getRandMovie().then((response) => {
+    //   this.title = response
+    //   this.loading = false
+    // }).catch(console.log)
+
+    this.loading = false
 
   }
   

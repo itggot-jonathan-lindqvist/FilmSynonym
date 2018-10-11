@@ -25,8 +25,9 @@ import BootstrapVue from "bootstrap-vue";
 Vue.use(BootstrapVue);
 import "bootstrap/dist/css/bootstrap.css";
 import movieVue from "@/views/movie.vue";
-let key = "57b31362",
-  baseurl = "https://www.omdbapi.com/?apikey=" + key;
+import {getRandMovie} from '../api'
+import {getMovie} from '../api'
+
 export default Vue.extend({
   data: function() {
     return {
@@ -36,82 +37,37 @@ export default Vue.extend({
       rightAnswer: "",
       title: "",
       Plot: "",
-      // show: false,
     };
   },
 
-  // computed: {
-  //   isDisabled: function() {
-  //     return !this.show
-  // }
-  // },
-
   methods: {
     getmovie() {
-      let titles = new Promise((resolve, reject) => {
-        for (let i = 0; i < 4; i++) {
-          this.omdbID = "tt0";
-          this.title = "";
-          // console.log("Entered function movieID");
-          for (let y = 0; y < 6; y++) {
-            // This will loop 6 times
-            let number = Math.floor(Math.random() * 10);
-            let num = number.toString();
-            this.omdbID = this.omdbID + num;
-            // console.log(this.omdbID);
-          }
+      let movies = []
 
-          axios.get(baseurl + "&i=" + this.omdbID).then(response => {
-            // console.log("here now");
-            // console.log(response.data.Title);
-            this.movieIds.push(response.data.Title)
-             // fungerar men står fel
-          });
+      for (let index = 0; index < 4; index++) {
+        movies.push(getRandMovie())
+      }
+     
+      Promise.all(movies).then((response) => {
+
+        if(typeof response === "string"){
+          console.log(response)
         }
-        console.log(this.movieIds)
-        console.log()
-        resolve(this.movieIds)
+
+        console.log(response[0].data.Plot)
+        console.log(response[1].data.Plot)
+        console.log(response[2].data.Plot)
+        console.log(response[3].data.Plot)
+
+
+        this.movieIds = response
+    
+      }).catch(() => {
+        console.log("FUCK")
       })
-      titles.then(response => {
-        let rand = Math.floor(Math.random() * 3);
-        console.log(rand);
-        console.log(this.movieIds.length);
-        console.log()
-        for (let index = 0; index < this.movieIds.length; index++) {
-          console.log(this.movieIds[index]);
-          
-        }
-        
-        console.log(rand)
-        // axios.get(baseurl + "&t=" + this.movieIds[rand]).then(response => {
-        //   console.log("test")
-        //   console.log(this.movieIds[rand])
-        //   console.log("test")
-        //   this.rightAnswer = this.movieIds[rand]
-        //   this.Plot = response.data.Plot
-        // })
-      });
-    },
-    getPlot() {
-      Promise.all(this.movieIds).then(response =>{
-        let rand = Math.floor(Math.random() * 3);
-        console.log(rand);
-        console.log(response)
 
-        let eArr = this.movieIds[Symbol.iterator]();
-        console.log(eArr.next().value);
-        console.log(response)
-        console.log(this.movieIds)
-        console.log(response)
-        console.log(rand)
-        // axios.get(baseurl + "&t=" + this.movieIds[rand]).then(response => {
-        //   console.log("test")
-        //   console.log(this.movieIds[rand])
-        //   console.log("test")
-        //   this.rightAnswer = this.movieIds[rand]
-        //   this.Plot = response.data.Plot
-        // })
-      });
+      console.log(getMovie(this.movieIds[0]))
+
     }
   }
 });

@@ -67,7 +67,7 @@ function getRandMovie() {
         }
 
         axios.get(url + baseId + id).then((response) => {
-            resolve(response.data.Title)
+            resolve(response)
         }).catch(console.log)
     })
 }
