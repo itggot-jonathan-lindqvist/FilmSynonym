@@ -1,20 +1,22 @@
 <template lang="pug">
-    .container
+    .container#test
         div(v-if="loading")
             p it's loading
         div(v-else)
             .container-item
                 .go_back-container
-                    i.material-icons.go_back arrow_back
+                    i(:style="{color: plotColor}").material-icons.go_back#goback123 arrow_back
                 .title-container
-                    h1.movie_title {{ this.title }}
+                    h1(:style="{color: movieColor}").movie_title {{ this.title }}
                 .switch-container
                     .switch-container-item1
                         .switch-container-item2
-                            h1 Change Words
+
+                            h1(:style="{color: plotColor}") Change Words
                             changeWords(v-on:active="changeWords($event)" :class="{used: isUsed}")
+
             .container-item.plot-text-container
-                p.plot-text {{ this.plot }}
+                p(:style="{color: plotColor}").plot-text#plot {{ this.plot }}
 </template>
 
 <script lang="ts">
@@ -42,6 +44,15 @@ export default Vue.extend({
         originalTitle: "",
 
         plot: "",
+
+        // here new
+        isActive: false,
+        activeColor: null,
+        activeFlex: null,
+        movieColor: "",
+        plotColor: "",
+        // here new end
+        
         newPlot: "",
         originalPlot: "",
 
@@ -50,6 +61,7 @@ export default Vue.extend({
     },
 
     methods: {
+
 
         changeWords: function(isActive) {
 
@@ -112,6 +124,12 @@ export default Vue.extend({
 
     mounted(){
 
+        if (this.$parent.$data.theme == false){}else{
+        this.movieColor = "#8d2663"
+        this.plotColor = "white"
+        //this.$children[0].$data.backgroundColor = "black"
+        }
+
         this.title = this.$route.params.movie
         this.originalTitle = this.$route.params.movie
 
@@ -120,7 +138,7 @@ export default Vue.extend({
             this.originalPlot = response
             this.loading = false
         }).catch(console.log)
-  
+
     }
     
 })
@@ -185,6 +203,5 @@ export default Vue.extend({
     .plot-text
         margin-left: 25%
         margin-right: 25%
-    
 
 </style>

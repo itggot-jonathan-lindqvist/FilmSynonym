@@ -23,13 +23,23 @@ export default Vue.extend({
         change: function() {
             this.$emit('active', this.isActive)
             this.isActive = !this.isActive  
-            if (this.isActive == true) {
-                this.activeFlex = "flex-end"
-                this.activeColor = "dodgerblue"
+            if(this.$parent.$data.theme == false){
+                if (this.isActive == true) {
+                    this.activeFlex = "flex-end"
+                    this.activeColor = "dodgerblue"
+                }else{
+                    this.activeFlex = null
+                    this.activeColor = null
+                }
             }else{
-                this.activeFlex = null
-                this.activeColor = null
-            }            
+                if (this.isActive == true) {
+                    this.activeFlex = "flex-end"
+                    this.activeColor = "#8d2663"
+                }else{
+                    this.activeFlex = null
+                    this.activeColor = null
+                }
+            }
         }
     }
 })
