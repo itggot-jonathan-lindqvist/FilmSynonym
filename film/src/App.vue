@@ -48,21 +48,14 @@ export default Vue.extend({
   methods:{
     testing: function(){
       window.location.href = 'http://localhost:8080/' + this.title
-      //this.loading = true
       console.log("WHAT THE FUCK!!!")
-      //this.loading = false
     },
     changeTheme: function(){
-      // console.log("HSDAKSLDHL")
       if(this.theme == false){
         this.headerColor = "black"
         this.appColor = "Black"
         this.searchTitleColor = "#8d2663"
         this.theme = true
-        // console.log("cancer")
-        // console.log(this.$children[3].$data)
-        // console.log(this.$children[3])
-        // console.log(this.$children[3].$children[0])
         if(this.$children[3].$vnode.tag != "vue-component-6"){
   
           this.$children[3].$data.searchTitleColor = "#8d2663"
@@ -74,14 +67,9 @@ export default Vue.extend({
           this.$children[3].$data.plotColor = "white"
         }
       }else{
-        //here
         this.headerColor = "DodgerBlue"
         this.appColor = "white"
         this.theme = false
-        // console.log("cancer")
-        // console.log(this.$children[3].$data)
-        // console.log(this.$children[3])
-        // console.log(this.$children[3].$children[0])
         if(this.$children[3].$vnode.tag != "vue-component-6"){
   
           this.$children[3].$data.searchTitleColor = "DodgerBlue"
@@ -133,24 +121,6 @@ export default Vue.extend({
     justify-content: space-around
     min-height: 100px
     max-height: 100px
-
-  // .app-dark
-  //   background-color: black
-  // .header-dark
-  //   background-color: black
-  // .container-dark
-  //   color: #8d2663 !important
-  // .searchtext-dark
-  //   color: #8d2663 !important
-  //   background-color: black 
-  //   border-color: #8d2663 !important
-  // .searchbtn-dark
-  //   background-color: black !important
-  //   border-color: #8d2663 !important
-  //   color: #8d2663 !important
-  // .goback-dark
-  //   color: white !important
-  //   background-color: red
 
   .header-item
     width: 33%
