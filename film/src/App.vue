@@ -28,14 +28,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from "axios";
+import {getRandMovie} from './api'
 
-let key = "57b31362",
-  baseurl = "https://www.omdbapi.com/?apikey=" + key;
 export default Vue.extend({
 
   data: function(){
     return{
-      omdbID: "tt0",
       title: "",
       loading: true
     }
@@ -51,23 +49,14 @@ export default Vue.extend({
   },
 
   mounted(){
-    this.omdbID = "tt0"
-    this.title = ""
-    console.log("Entered function movieID")
-    for ( var i = 0; i < 6; i++ ) {
-      // This will loop 6 times
-      let number = Math.floor(Math.random() * 10); 
-      let num = number.toString()
-      this.omdbID = this.omdbID  + num
-      console.log(this.omdbID)
-    }
+    
+    // getRandMovie().then((response) => {
+    //   this.title = response
+    //   this.loading = false
+    // }).catch(console.log)
 
-    axios.get(baseurl + "&i=" + this.omdbID).then((response) => {
-      console.log("here now")
-      console.log(response.data.Title)
-      this.title = response.data.Title
-      this.loading = false
-    })
+    this.loading = false
+
   }
   
 })

@@ -12,8 +12,7 @@
                     .switch-container-item1
                         .switch-container-item2
                             h1 Change Words
-                            .switch(@click="switchWords" v-class="{active: isActive}" :style="{justifyContent: activeFlex}")
-                                .switch-ball(:style="{backgroundColor: activeColor}")
+                            changeWords(v-on:active="changeWords($event)" :class="{used: isUsed}")
             .container-item.plot-text-container
                 p.plot-text {{ this.plot }}
 </template>
@@ -21,45 +20,107 @@
 <script lang="ts">
 import Vue from 'vue'
 import axios from 'axios'
+import changeWords from '@/components/switch.vue'
+import {getSynonym} from '../api'
+import {getMovies} from '../api'
+import {getMovie} from '../api'
+import {switchWords} from '../methods'
+
 export default Vue.extend({
+
+    components: {
+        changeWords
+    },
 
     data: function() {
         return {
-        title: this.$route.params.movie,
-        loading: true,
+
+        isUsed: false,
+        
+        title: "",
+        newTitle: "",
+        originalTitle: "",
+
         plot: "",
-        isActive: false,
-        activeColor: null,
-        activeFlex: null
+        newPlot: "",
+        originalPlot: "",
+
+        loading: true,
         }
     },
 
     methods: {
-        switchWords: function() {
-            this.isActive = !this.isActive
-            if (this.isActive == true) {
-                this.activeFlex = "flex-end"
-                this.activeColor = "dodgerblue"
-            }else{
-                this.activeFlex = null
-                this.activeColor = null
+
+        changeWords: function(isActive) {
+
+            if (this.isUsed && isActive) {
+                this.title = this.originalTitle
+                this.plot = this.originalPlot
+
+            }else if (this.isUsed && isActive == false){
+                this.title = this.newTitle
+                this.plot = this.newPlot
+
+            } else {
+
+                ////TITLE
+                let title = this.title.split(/[.,':\/ -]/)
+                let titleWords = []
+                
+                for (let index = 0; index < title.length; index++) {
+                    if (title[index] != "") {
+                        titleWords.push(getSynonym(title[index]))
+                    }
+                }
+
+                Promise.all(titleWords)
+                .then((response) => {
+                    
+                    let newTitle = switchWords(response, this.title)
+
+                    this.title = newTitle
+                    this.newTitle = newTitle
+                })
+                .catch(console.log)
+
+                ////PLOT
+                let plot = this.plot.split(/[.,':\/ -]/)
+                let plotWords = []
+
+                for (let index = 0; index < plot.length; index++) {
+                    if (plot[index] != "") {
+                        plotWords.push(getSynonym(plot[index]))
+                    }
+                }
+
+                Promise.all(plotWords)
+                .then((response) => {
+                    
+                    let newPlot = switchWords(response, this.plot)
+
+                    this.plot = newPlot
+                    this.newPlot = newPlot
+                })
+                .catch(console.log)
+
+
+                this.isUsed = true
+
             }
-        },
+        }
     },
 
     mounted(){
-        console.log("Hello, I'm mounted")
-        console.log(this.title)
-        let key = "57b31362",
-            baseurl = "https://www.omdbapi.com/?apikey=" + key;
-        axios.get(baseurl + "&t=" + this.title).then((response) => {
-            console.log("here")
-            console.log(response.data.Plot)
-            this.plot = response.data.Plot
-            // insert word loop here with throttler 
-            this.loading = false
 
-        })
+        this.title = this.$route.params.movie
+        this.originalTitle = this.$route.params.movie
+
+        getMovie(this.title).then((response) => {
+            this.plot = response
+            this.originalPlot = response
+            this.loading = false
+        }).catch(console.log)
+  
     }
     
 })

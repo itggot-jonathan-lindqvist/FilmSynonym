@@ -26,8 +26,9 @@ import BootstrapVue from "bootstrap-vue";
 Vue.use(BootstrapVue);
 import "bootstrap/dist/css/bootstrap.css";
 import movieVue from "@/views/movie.vue";
-let key = "57b31362",
-  baseurl = "https://www.omdbapi.com/?apikey=" + key;
+import {getRandMovie} from '../api'
+import {getMovie} from '../api'
+
 export default Vue.extend({
   data: function() {
     return {
@@ -37,43 +38,42 @@ export default Vue.extend({
       rightAnswer: "",
       title: "",
       Plot: "",
+<<<<<<< HEAD
       // show: false,
  
+=======
+>>>>>>> a1a98ead800872f20d6128433c042cb7c3ba4825
     };
   },
 
-  // computed: {
-  //   isDisabled: function() {
-  //     return !this.show
-  // }
-  // },
-
   methods: {
     getmovie() {
-      
-      
-        
-    },
-    smoothScroll(target:any){
-    let scrollContainer = target;
-    do { //find scroll container
-        scrollContainer = scrollContainer.parentNode;
-        if (!scrollContainer) return;
-        scrollContainer.scrollTop += 1;
-    } while (scrollContainer.scrollTop == 0);
+      let movies = []
+
+      for (let index = 0; index < 4; index++) {
+        movies.push(getRandMovie())
+      }
+     
+      Promise.all(movies).then((response) => {
+
+        if(typeof response === "string"){
+          console.log(response)
+        }
+
+        console.log(response[0].data.Plot)
+        console.log(response[1].data.Plot)
+        console.log(response[2].data.Plot)
+        console.log(response[3].data.Plot)
+
+
+        this.movieIds = response
     
-    let targetY = 0;
-    do { //find the top of target relatively to the container
-        if (target == scrollContainer) break;
-        targetY += target.offsetTop;
-    } while (target = target.offsetParent);
-    
-    let scroll = function(c, a, b, i) {
-        i++; if (i > 30) return;
-        c.scrollTop = a + (b - a) / 30 * i;
-        setTimeout(function(){ scroll(c, a, b, i); }, 20);
-    }
-    // start scrolling
+      }).catch(() => {
+        console.log("FUCK")
+      })
+
+      console.log(getMovie(this.movieIds[0]))
+
     }
   }
 })
