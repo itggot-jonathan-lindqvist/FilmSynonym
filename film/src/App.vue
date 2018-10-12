@@ -20,7 +20,7 @@
               i.material-icons home
 
           
-          router-link(to="/throttler/throttler") throttler
+          //- router-link(to="/throttler/throttler") throttler
           router-link(to="/quiz/quiz") quiz
       router-view
 
@@ -55,6 +55,7 @@ export default Vue.extend({
         this.appColor = "Black"
         this.searchTitleColor = "#8d2663"
         this.theme = true
+        console.log(this.$children)
         if(this.$children[3].$vnode.tag != "vue-component-6"){
   
           this.$children[3].$data.searchTitleColor = "#8d2663"
@@ -86,12 +87,12 @@ export default Vue.extend({
 
   mounted(){
     
-    // getRandMovie().then((response) => {
-    //   this.title = response
-    //   this.loading = false
-    // }).catch(console.log)
+    getRandMovie().then((response) => {
+      this.title = response.data.Title
+      this.loading = false
+    }).catch(console.log)
 
-    this.loading = false
+    // this.loading = false
 
   }
   

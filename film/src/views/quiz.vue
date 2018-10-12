@@ -4,20 +4,14 @@
         div(v-if="start")
             .btn-primary.btn-lg.btn.btn-block(@click="start=false, getmovie()" type="button") START
         div(v-else)
-            ul.list-group.shadow-lg.p-3.mb-5.bg-white.rounded(v-for=" i in 4" )
-                //- div(v-if="rightAnswer =")     
+            ul.list-group.shadow-lg.p-3.mb-5.bg-white.rounded
                            
                 .btn.btn-group-vertical.blockquote.list-group-item-action.active(v-for="movie in movies" @click="answer(movie)") {{movie}}
             .plot.card.shadow-lg.bg-white.rounded.p-3.m-5
                 .card-body                                         
                     p.card-text.text-center.lead {{plot}}
             .col-m-12.text-center          
-<<<<<<< HEAD
                 .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5(@click="getmovie") Try Again!
-=======
-                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5(type="button" onclick="smoothScroll(document.getElementById('second'))")  NEXT
-            
->>>>>>> 54ee1d3f0137c449c513e88a65ab6fd260c6ef53
             
 
 
@@ -95,36 +89,7 @@ export default Vue.extend({
         console.log("FUCK")
       })
 
-<<<<<<< HEAD
     }
-=======
-      console.log(getMovie(this.movieIds[0]))
-
-    },
-    
-    // smoothScroll(target:any){
-    //     let scrollContainer = target;
-    //     do { //find scroll container
-    //         scrollContainer = scrollContainer.parentNode;
-    //         if (!scrollContainer) return;
-    //         scrollContainer.scrollTop += 1;
-    //     } while (scrollContainer.scrollTop == 0);
-        
-    //     let targetY = 0;
-    //     do { //find the top of target relatively to the container
-    //         if (target == scrollContainer) break;
-    //         targetY += target.offsetTop;
-    //     } while (target = target.offsetParent);
-        
-    //     let scroll = function(c, a, b, i) {
-    //         i++; if (i > 30) return;
-    //         c.scrollTop = a + (b - a) / 30 * i;
-    //         setTimeout(function(){ scroll(c, a, b, i); }, 20);
-    //     }
-
-
-    // }
->>>>>>> 54ee1d3f0137c449c513e88a65ab6fd260c6ef53
   }
 })
 
@@ -132,14 +97,5 @@ export default Vue.extend({
 
 
 <style lang="sass">
-<<<<<<< HEAD
-=======
-
-
-
-
-
-        
->>>>>>> 54ee1d3f0137c449c513e88a65ab6fd260c6ef53
 </style>
 

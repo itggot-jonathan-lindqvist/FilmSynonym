@@ -75,7 +75,7 @@
     color: dodgerblue
     background-color: white
     text-align: center
-    height: 94px
+    height: 111px
     width: 103px
     border-color: dodgerblue
     border-style: solid
