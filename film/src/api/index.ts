@@ -21,7 +21,6 @@ function getSynonym(word:String) : Promise<String> {
         }).catch((response) => {
             console.log("ERROR ON API REQUEST")
             console.log(response)
-            resolve(word)
         })
     })
 }
@@ -67,10 +66,16 @@ function getRandMovie() {
         }
 
         axios.get(url + baseId + id).then((response) => {
-            resolve(response.data.Title)
+            if (response.data.Plot === "N/A" || response.data.Plot === undefined) {
+                resolve(getRandMovie())
+            }else {
+                resolve(response)
+            }
+
         }).catch(console.log)
     })
 }
+
 
 export {getSynonym}
 export {getMovies}

@@ -20,7 +20,8 @@
               i.material-icons home
 
           
-          router-link(to="/throttler") throttler
+          router-link(to="/throttler/throttler") throttler
+          router-link(to="/quiz/quiz") quiz
       router-view
 
 </template>
@@ -30,8 +31,6 @@ import Vue from 'vue'
 import axios from "axios";
 import {getRandMovie} from './api'
 
-let key = "57b31362",
-  baseurl = "https://www.omdbapi.com/?apikey=" + key;
 export default Vue.extend({
 
   data: function(){
@@ -87,10 +86,12 @@ export default Vue.extend({
 
   mounted(){
     
-    getRandMovie().then((response) => {
-      this.title = response
-      this.loading = false
-    }).catch(console.log)
+    // getRandMovie().then((response) => {
+    //   this.title = response
+    //   this.loading = false
+    // }).catch(console.log)
+
+    this.loading = false
 
   }
   
