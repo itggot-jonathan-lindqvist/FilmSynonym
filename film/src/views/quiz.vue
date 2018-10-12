@@ -7,12 +7,12 @@
             ul.list-group.shadow-lg.p-3.mb-5.bg-white.rounded()
                 //- div(v-if="rightAnswer =")     
                            
-                .btn.btn-group-vertical.blockquote.list-group-item-action.active(v-for="(movie,index) in movieIds" ) {{movie}}
+                .btn.btn-group-vertical.blockquote.list-group-item-action.active(v-for="movie in movies" @click="answer(movie)") {{movie}}
             .plot.card.shadow-lg.bg-white.rounded.p-3.m-5
                 .card-body                                         
-                    p.card-text.text-center.lead {{Plot}}
+                    p.card-text.text-center.lead {{plot}}
             .col-m-12.text-center          
-                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5  NEXT
+                .btn.btn-primary.btn-lg.center-block.btn-block.w-25.p-4.float-right.mr-5(@click="getmovie") Try Again!
             
 
 
@@ -27,21 +27,33 @@ import "bootstrap/dist/css/bootstrap.css";
 import movieVue from "@/views/movie.vue";
 import {getRandMovie} from '../api'
 import {getMovie} from '../api'
+import {getSynonym} from '../api'
+import {switchWords} from '../methods'
 
 export default Vue.extend({
   data: function() {
     return {
       start: true,
-      omdbID: "tt0",
-      movieIds: [],
+      movies: [],
       rightAnswer: "",
-      title: "",
-      Plot: "",
+      plot: "",
     };
   },
 
   methods: {
-    getmovie() {
+    answer: function(answer) {
+
+      if (answer == this.rightAnswer){
+        alert("you are right!")
+      }else {
+        alert("you are wrong!")
+      }
+    },
+
+    getmovie: function () {
+      this.plot = ""
+      this.rightAnswer = ""
+      this.movies = []
       let movies = []
 
       for (let index = 0; index < 4; index++) {
@@ -50,23 +62,33 @@ export default Vue.extend({
      
       Promise.all(movies).then((response) => {
 
-        if(typeof response === "string"){
-          console.log(response)
+        let randNum = Math.floor(Math.random() * (movies.length))
+
+        this.rightAnswer = response[randNum].data.Title
+        this.plot = response[randNum].data.Plot
+        let plot = this.plot.split(/[.,':\/ -]/)
+        let plotWords = []
+
+        for (let index = 0; index < plot.length; index++) {
+          if (plot[index] != "") {
+            plotWords.push(getSynonym(plot[index]))
+          }
         }
 
-        console.log(response[0].data.Plot)
-        console.log(response[1].data.Plot)
-        console.log(response[2].data.Plot)
-        console.log(response[3].data.Plot)
+        Promise.all(plotWords)
+        .then((response) => {
+          let newPlot = switchWords(response, this.plot)
+          this.plot = newPlot
+        })
+        .catch(console.log)
 
-
-        this.movieIds = response
+        for (let index = 0; index < response.length; index++) {
+          this.movies.push(response[index].data.Title)
+        }
     
       }).catch(() => {
         console.log("FUCK")
       })
-
-      console.log(getMovie(this.movieIds[0]))
 
     }
   }
@@ -75,27 +97,5 @@ export default Vue.extend({
 
 
 <style lang="sass">
-
-    // .titles
-    //     width: 100%
-    //     heigth: 30vh
-    //     margin: auto
-        
-    // .plot
-    //     width: 100%
-    //     heigth: 30vh
-    //     margin: auto
-    //  #btn
-    //     background: #456
-    //     padding: 10px
-    //    margin: auto
-
-    // div
-    //     width: 100%
-
-
-
-
-        
 </style>
 
